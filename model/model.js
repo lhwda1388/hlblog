@@ -18,7 +18,7 @@ module.exports = function(mongoose){
   var categorySchema = new Schema({
     category_no : { type : Number , required : true , unique : true },
     category_ne : { type : String , required : true },
-    auth        : { type : String }
+    auth        : { type : String },
     reg_dt  : { type : Date , default : Date.now() }
   });
   mongoose.model('category', categorySchema);
@@ -27,27 +27,34 @@ module.exports = function(mongoose){
     usr_mail : { type : String , required : true , unique : true },
     usr_pwd  : { type : String , required : true },
     usr_ne   : { type : String },
-    auth     : { type : String }
+    auth     : { type : String },
     reg_dt   : { type : Date , default : Date.now() }
   });
   mongoose.model('user', userSchema);
 
   var authSchema = new Schema({
     auth    : { type : String , required : true , unique : true },
-    auth_ne : { type : String , required : true}
+    auth_ne : { type : String , required : true},
     reg_dt  : { type : Date , default : Date.now() }
   });
   mongoose.model('auth', authSchema);
 
   var postSchema = new Schema({
-    post_no     :  { type : Number , required : true , unique : true},
-    category_no  :  { type : Number , required : true }
-    hosp_ne      :  { type : Number , required : true},
+    post_no      :  { type : Number , required : true , unique : true},
+    category_no  :  { type : Number , required : true },
     title        :  { type : String , required : true},
     content      :  { type : String },
     read_cnt     :  { type : Number },
     reg_id       :  { type : String , required : true },
     reg_dt       :  { type : Date , default : Date.now() }
+  });
+  var fileSchema = new Schema({
+    file_no   : { type : Number , required : true , unique : true},
+    post_no   : { type : Number , required : true },
+    file_ne   : { type : Number , required : true },
+    file_ext  : { type : Number , required : true },
+    file_path : { type : Number , required : true },
+    reg_dt    :  { type : Date , default : Date.now() }
   });
   mongoose.model('post', postSchema);
 
