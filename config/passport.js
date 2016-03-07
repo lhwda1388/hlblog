@@ -12,6 +12,7 @@ module.exports = function (passport, User, LocalStrategy) {
       var resUser = {
           usr_email : user.usr_email,
           usr_ne    : user.usr_ne,
+          usr_path  : user.usr_path,
           auth      : user.auth,
           reg_dt    : user.reg_dt
       }
