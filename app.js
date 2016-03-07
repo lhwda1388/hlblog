@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,9 +7,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config =  require('./config/config');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var model = require('./models/model')(mongoose);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var passportConf = require('./config/passport')(passport, mongoose.model('user'), LocalStrategy);
 
 var app = express();
 
@@ -25,6 +31,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({
+    secret: 'mySecretKey',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
@@ -65,7 +78,6 @@ mongoose.connect(config.db.host, config.db.dbOption,function(err){
 });
 
 global.config = config;
-global.model = require('./model/model')(mongoose);
+global.model = model;
 global.mongoose = mongoose;
-
 module.exports = app;
