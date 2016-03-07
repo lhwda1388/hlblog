@@ -4,10 +4,9 @@ var layout_path = "layout/layout";
 var crypto = require('../util/crypto');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  if( req.isAuthenticated() ){
-    console.log(req.user);
-  }
+router.get('/:usr_mail', function(req, res, next) {
+  var usr_mail = req.params.usr_mail;
+  
   res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
 /*var user = global.mongoose.model('user');
   var userSave = new user({
@@ -33,15 +32,15 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/post', function(req, res, next) {
+router.get('/:usr_mail/:post_no', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../post.ejs' });
 });
 
-router.get('/contact', function(req, res, next) {
+router.get('/:usr_mail/contact', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../contact.ejs' });
 });
 
-router.get('/about', function(req, res, next) {
+router.get('/:usr_mail/about', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../about.ejs' });
 });
 

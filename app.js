@@ -39,9 +39,12 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
-  console.log(req.user);
   if(req.isAuthenticated() ) res.locals.users = req.user;
   else res.locals.users = undefined;
+  next();
+});
+app.use("/:usr_mail",function(req, res, next){
+  res.locals.defaultPath = req.params.usr_mail;
   next();
 });
 app.use('/', routes);

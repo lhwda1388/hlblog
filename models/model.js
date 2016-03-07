@@ -19,6 +19,7 @@ module.exports = function(mongoose){
     category_no : { type : Number , required : true , unique : true },
     category_ne : { type : String , required : true },
     auth        : { type : String },
+    usr_path    : { type : String },
     reg_dt      : { type : Date , default : Date.now() }
   });
   mongoose.model('category', categorySchema);
@@ -36,7 +37,8 @@ module.exports = function(mongoose){
     title        :  { type : String , required : true},
     content      :  { type : String },
     read_cnt     :  { type : Number },
-    reg_mail     :  { type : String , required : true },
+    usr_email     :  { type : String , required : true },
+    usr_path  : { type : String },
     reg_dt       :  { type : Date , default : Date.now() }
   });
   mongoose.model('post', postSchema);
@@ -45,6 +47,7 @@ module.exports = function(mongoose){
     usr_email : { type : String , required : true , unique : true },
     usr_pwd   : { type : String , required : true },
     usr_ne    : { type : String },
+    usr_path  : { type : String },
     auth      : { type : String },
     reg_dt    : { type : Date , default : Date.now() }
   });
@@ -60,15 +63,15 @@ module.exports = function(mongoose){
     file_ne   : { type : Number , required : true },
     file_ext  : { type : Number , required : true },
     file_path : { type : Number , required : true },
-    reg_mail  : { type : String },
     reg_dt    : { type : Date , default : Date.now() }
   });
   mongoose.model('file', postSchema);
 
   var reviewSchema = new Schema({
     review_no : { type : Number , required : true , unique : true },
+    post_no   : { type : Number , required : true },
     content   : { type : String },
-    reg_mail  : { type : String },
+    usr_email  : { type : String },
     reg_dt    : { type : Date , default : Date.now() }
   });
   mongoose.model('review', reviewSchema);
