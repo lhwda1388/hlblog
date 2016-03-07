@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     console.log(req.user);
   }
   res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
-/*  var user = global.mongoose.model('user');
+/*var user = global.mongoose.model('user');
   var userSave = new user({
                           "usr_email" : "lhwda1388@gmail.com" ,
                           "usr_pwd"   : crypto.encrypt("1234"),
