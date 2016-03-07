@@ -49,9 +49,8 @@ module.exports = function(mongoose){
     reg_dt    : { type : Date , default : Date.now() }
   });
   userSchema.methods.validPassword = function( pwd ) {
-    // EXAMPLE CODE!
-    return ( this.usr_pwd === pwd );
-};
+      return ( this.usr_pwd === pwd );
+  };
 
   mongoose.model('user', userSchema);
 

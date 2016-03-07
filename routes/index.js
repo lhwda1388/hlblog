@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var layout_path = "layout/layout";
+var crypto = require('../util/crypto');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if( req.isAuthenticated() ){
+    console.log(req.user);
+  }
   res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
-  /*var user = global.mongoose.model('user');
+  var user = global.mongoose.model('user');
   var userSave = new user({
                           "usr_email" : "lhwda1388@gmail.com" ,
-                          "usr_pwd"   : "1234",
+                          "usr_pwd"   : crypto.encrypt("1234"),
                           "usr_ne"    : "이현우",
                           "auth"      : "A",
                           "reg_dt"    : Date.now()
@@ -23,13 +28,10 @@ router.get('/', function(req, res, next) {
           });
         }
 
-      });*/
-});
-
-
-router.get('/login_fail', function(req, res, next) {
+      });
 
 });
+
 
 router.get('/post', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../post.ejs' });
