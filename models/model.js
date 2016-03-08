@@ -46,8 +46,8 @@ module.exports = function(mongoose){
   var userSchema = new Schema({
     usr_email : { type : String , required : true , unique : true },
     usr_pwd   : { type : String , required : true },
-    usr_ne    : { type : String },
-    usr_path  : { type : String },
+    usr_ne    : { type : String , required : true },
+    usr_path  : { type : String , required : true , unique : true },
     auth      : { type : String },
     reg_dt    : { type : Date , default : Date.now() }
   });

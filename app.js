@@ -10,7 +10,7 @@ var config =  require('./config/config');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var model = require('./models/model')(mongoose);
-
+var auth = require('./routes/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -38,13 +38,14 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
+app.use("/:usr_path", auth.Category, function(req, res, next){
+
   if(req.isAuthenticated() ) res.locals.users = req.user;
   else res.locals.users = undefined;
-  next();
-});
-app.use("/:usr_mail",function(req, res, next){
-  res.locals.defaultPath = req.params.usr_mail;
+
+  res.locals.defaultPath = req.params.usr_path;
+  res.locals.categories  = req.categories;
+  req.usr_path = req.params.usr_path;
   next();
 });
 app.use('/', routes);
