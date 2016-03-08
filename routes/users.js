@@ -1,5 +1,6 @@
 var express = require('express');
-var passport=require('passport')
+var passport = require('passport');
+var auth =  require("./auth");
 var router = express.Router();
 
 
@@ -17,11 +18,12 @@ router.get('/login_fail' , function(req, res, next){
 });
 
 router.get('/login_success' , function(req, res, next){
+  console.log(req.user.usr_path);
   console.log("sucess");
   res.redirect('/');
 });
 
-router.get('/logout' , function(req, res, next){
+router.post('/logout' , function(req, res, next){
   req.session.destroy()
   req.logout()
   res.redirect('/')

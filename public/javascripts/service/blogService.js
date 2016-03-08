@@ -1,5 +1,5 @@
 var config = {
-    list : "/<%=defaultPath%>/post/getPost",
+    list : "/post/getPost",
     view : "/post/view/viewPost",
     save : "/post/set/setPost"
 };

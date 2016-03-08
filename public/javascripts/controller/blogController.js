@@ -9,7 +9,7 @@ var blogctrl = (function(){
     $scope.postInfo.listScale = 10;
     $scope.postInfo.board_no = 1;
     $scope.postInfo.search_text = "";
-    blogService.getList($scope.postInfo);
+    //blogService.getList($scope.postInfo);
   }]).controller('naviCtrl', ['$scope' ,  function ($scope) {
 
 

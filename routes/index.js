@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
 });
 /* GET home page. */
 router.get('/:usr_path', function(req, res, next) {
-  var usr_mail = req.params.usr_path;
+  var usr_path = req.params.usr_path;
+
   res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
 });
 

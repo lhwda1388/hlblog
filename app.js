@@ -38,7 +38,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/:usr_path", auth.Category, function(req, res, next){
+app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
 
   if(req.isAuthenticated() ) res.locals.users = req.user;
   else res.locals.users = undefined;
