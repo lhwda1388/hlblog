@@ -9,24 +9,22 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/login', passport.authenticate('login' , { successRedirect:'/users/login_success', failureRedirect: '/users/login_fail', failureFlash: false } ), function(req, res, next) {
-});
+router.post('/login', passport.authenticate('login', { failureRedirect: '/user/login_fail', failureFlash: false } ), function(req, res, next) {
 
+  if(req.isAuthenticated()){
+    console.log(req.url);
+    res.redirect("/");
+  }
+
+});
 router.get('/login_fail' , function(req, res, next){
-  console.log("fail");
-  res.redirect('/');
+//  res.redirect('/' + req.usr_path)
 });
 
-router.get('/login_success' , function(req, res, next){
-  console.log(req.user.usr_path);
-  console.log("sucess");
-  res.redirect('/');
-});
-
-router.post('/logout' , function(req, res, next){
+router.get('/logout' , function(req, res, next){
   req.session.destroy()
   req.logout()
-  res.redirect('/')
+  res.redirect('/' + req.usr_path)
 });
 
 module.exports = router;

@@ -38,6 +38,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/user/', users);
 app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
 
   if(req.isAuthenticated() ) res.locals.users = req.user;
@@ -48,8 +49,9 @@ app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
   req.usr_path = req.params.usr_path;
   next();
 });
-app.use('/', routes);
-app.use('/users', users);
+app.use("/", routes);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

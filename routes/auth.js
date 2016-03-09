@@ -18,17 +18,21 @@ module.exports.Auth = function(req, res, next){
 
 module.exports.usrPathChk = function(req, res, next){
   var usr_path    = req.params.usr_path;
+
   if(usr_path != ""){
     var User    = global.mongoose.model('user');
     User.findOne({ usr_path : usr_path }, function (err, user) {
-      if (err) {
-        error.NOT_FOUND(res, err);
-      }else if(!user){
-        error.NOT_FOUND(res, err);
+      if (err || !user) {
+        err = new Error('Not Found');
+        err.status = 404;
+        next(err);
+      }else{
+        next();
       }
     });
+  }else{
+    next();
   }
-  next();
 }
 
 module.exports.urlPath = function(req, res, next){
