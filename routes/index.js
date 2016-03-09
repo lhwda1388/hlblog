@@ -16,25 +16,24 @@ router.get('/:usr_path', function(req, res, next) {
 });
 
 router.post('/:usr_path/post/getPost', function(req, res, next){
-console.log("test : " + req.usr_path);
-  /*var field       = req.body;
+  var field       = req.body;
   var pageNo      = parseInt(field.pageNo);
   var listScale   = parseInt(field.listScale);
-
+  var usr_path    = req.params.usr_path;
   var searchText  = field.search_text.trim();
   var post        = global.mongoose.model('post');
   var skipNo      = listScale * ( pageNo - 1 );
-  var condition = {usr_path : "lhwda1388"};
+  var condition = {usr_path : usr_path};
   if(searchText != "") {
-      searchText = new RegExp(searchText, "i");
-      condition = { title : searchText};
+      //searchText = new RegExp(searchText, "i");
+      //condition = { title : searchText};
   }
 
   post.find(condition)
         .skip(skipNo)
         .limit(listScale)
-        .sort({parent_no : -1, child_sort : 1})
-        .exec(function (err, hb) {
+        .sort({post_no : -1})
+        .exec(function (err, pst) {
             if (err) {
                 error.SERVER_ERROR(res, err);
                 return;
@@ -42,10 +41,10 @@ console.log("test : " + req.usr_path);
             post.count(condition, function(err, count){
                 res.send({
                     count       : count,
-                    hBoard       : hb
+                    post        : pst
                 });
             });
-        });*/
+        });
 });
 
 router.get('/:usr_path/:post_no', function(req, res, next) {

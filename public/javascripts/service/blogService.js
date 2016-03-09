@@ -1,19 +1,26 @@
+var defaultPath = $(document.body).attr("data-defaultPath");
 var config = {
-    list : "/post/getPost",
-    view : "/post/view/viewPost",
-    save : "/post/set/setPost"
+    list : "/" + defaultPath + "/post/getPost",
+    view : "/" + defaultPath + "/post/view/viewPost",
+    save : "/" + defaultPath + "/post/set/setPost"
 };
 (function(config){
   'use strict';
   var app = blogctrl.app;
   app.factory('BlogService', ['$http', function ($http) {
     return {
-      getList: function(param) {
-        var convtParam = JSON.stringify(param);
-        $http.post(config.list, convtParam).success(function(data){
+      getList: function(url, param, $scope) {
 
+        var convtParam = JSON.stringify(param);
+        var res = {};
+        $http.post(url, convtParam).success(function(response){
+          res =  response.post;
+          $scope.postlist.data = response.post;
+          $scope.postInfo.cnt  = response.cnt;
         })
-        .error(function(e){})
+        .error(function(e){
+        });
+        return res;
       }
 
     };

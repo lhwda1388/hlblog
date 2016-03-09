@@ -13,6 +13,7 @@ var model = require('./models/model')(mongoose);
 var auth = require('./routes/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var flash = require('connect-flash');
 
 var passportConf = require('./config/passport')(passport, mongoose.model('user'), LocalStrategy);
 
@@ -31,6 +32,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
+
+app.use(flash());
+
 app.use(require('express-session')({
     secret: 'mySecretKey',
     resave: false,

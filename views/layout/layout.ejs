@@ -3,7 +3,7 @@
 
     <% include ./head.ejs %>
 
-<body ng-app="blogApp">
+<body ng-app="blogApp" data-defaultPath="<%=defaultPath%>">
     <% include ./nav.ejs %>
     <%- include(body) %>
 

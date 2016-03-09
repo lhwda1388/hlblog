@@ -1,6 +1,5 @@
 var crypto = require('../util/crypto');
 
-
 module.exports = function (passport, User, LocalStrategy) {
 
   passport.serializeUser(function (user, done) {
@@ -31,11 +30,11 @@ module.exports = function (passport, User, LocalStrategy) {
         }
 
         if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
+          return done(null, false, { message: req.flash('Incorrect username.') });
         }
 
         if (!user.validPassword(crypto.encrypt(password))) {
-          return done(null, false, { message: 'Incorrect password.' });
+          return done(null, false, { message: req.flash('Incorrect password.') });
         }
 
         return done(null, user);
