@@ -7,14 +7,15 @@ var blogctrl = (function(){
   app.controller('postCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
     $scope.postInfo = {};
     $scope.postInfo.page_no = 1;
-    $scope.postInfo.listScale = 10;
+    $scope.postInfo.listScale = 3;
     $scope.postInfo.board_no = 1;
-    $scope.postInfo.postCnt = 0;
-    $scope.postInfo.search_text = "";
     $scope.postlist = {};
-    $scope.postlist.data = {};
+    $scope.postlist.data  = {};
+    $scope.postInfo.search_text = "";
+    $scope.postInfo.getListPath = "/" + defaultPath + "/post/getPost";
+    $scope.BlogService = blogService;
 
-    blogService.getList( "/" + defaultPath + "/post/getPost" , $scope.postInfo , $scope);
+    blogService.getList( $scope);
 
     $scope.convertDate = function(dateStr){
       var fullDate = new Date(dateStr);
@@ -25,7 +26,7 @@ var blogctrl = (function(){
 
       return year + "." + month + "." + date;
     }
-    
+
   }]).controller('naviCtrl', ['$scope' ,  function ($scope) {
 
 

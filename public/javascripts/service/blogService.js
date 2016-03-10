@@ -7,20 +7,47 @@ var config = {
 (function(config){
   'use strict';
   var app = blogctrl.app;
+  var defaultPath = $(document.body).attr("data-defaultPath");
   app.factory('BlogService', ['$http', function ($http) {
     return {
-      getList: function(url, param, $scope) {
+      getList: function($scope) {
 
-        var convtParam = JSON.stringify(param);
-        var res = {};
-        $http.post(url, convtParam).success(function(response){
-          res =  response.post;
-          $scope.postlist.data = response.post;
-          $scope.postInfo.cnt  = response.cnt;
+        var convtParam = JSON.stringify($scope.postInfo);
+        $http.post($scope.postInfo.getListPath, convtParam).success(function(response){
+          var count = parseInt(response.count);
+          $scope.postlist     = {};
+          $scope.postlist.data  = response.post;
+          $scope.BlogService.getPager(parseInt($scope.postInfo.page_no), count, $scope);
         })
         .error(function(e){
         });
-        return res;
+
+      },
+      getPager: function(pageNo, totRecord, $scope){
+
+        var blockSize = 1;
+        var currentPage = pageNo == undefined ? 1 : pageNo;
+        var recordSize = parseInt($scope.postInfo.listScale);
+        var totalPage = Math.ceil(totRecord/recordSize);
+
+        $('.pager').bootpag().off("page");
+        $('.pager').bootpag({
+          total: totalPage,
+          page: currentPage,
+          maxVisible: blockSize,
+          leaps: false,
+          wrapClass: 'pagination',
+          activeClass: 'active',
+          disabledClass: 'disabled',
+          next: 'Older Posts &rarr;',
+          prev: '&larr;Newer Posts',
+          nextClass: 'next',
+          prevClass: 'previous',
+         }).on("page", function(event,  num){
+           $scope.postInfo.page_no = num;
+           $scope.BlogService.getList($scope);
+         });
+
       }
 
     };

@@ -16,7 +16,7 @@ router.get('/:usr_path', function(req, res, next) {
 
 router.post('/:usr_path/post/getPost', function(req, res, next){
   var field       = req.body;
-  var pageNo      = parseInt(field.pageNo);
+  var pageNo      = parseInt(field.page_no);
   var listScale   = parseInt(field.listScale);
   var usr_path    = req.params.usr_path;
   var searchText  = field.search_text.trim();
