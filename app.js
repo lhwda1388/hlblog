@@ -33,9 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
-
-app.use(flash());
-
 app.use(require('express-session')({
     secret: 'mySecretKey',
     resave: false,
@@ -45,7 +42,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/user/', users);
 app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
-
   if(req.isAuthenticated() ) res.locals.users = req.user;
   else res.locals.users = undefined;
 
@@ -54,7 +50,8 @@ app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
   req.usr_path = req.params.usr_path;
   next();
 });
-app.use("/", routes);
+app.use("/", routes, function(req, res, next){
+});
 
 
 

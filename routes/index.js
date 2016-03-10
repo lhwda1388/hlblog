@@ -5,14 +5,13 @@ var crypto = require('../util/crypto');
 var auth  = require("./auth");
 
 router.get('/', function(req, res, next) {
-
+  res.locals.defaultPath = "";
   res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
 });
 /* GET home page. */
 router.get('/:usr_path', function(req, res, next) {
   var usr_path = req.params.usr_path;
-
-  res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
+  res.render(layout_path, { title : "hlblog" , body: '../main.ejs' });
 });
 
 router.post('/:usr_path/post/getPost', function(req, res, next){

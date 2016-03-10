@@ -5,9 +5,8 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Clean Blog</h1>
-                    <hr class="small">
-                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    <h1><%=title%></h1>
+                    <hr class="large">
                 </div>
             </div>
         </div>
@@ -17,31 +16,20 @@
 <!-- Main Content -->
 <div class="container" >
     <div class="row">
-        <div class="col-lg-8 col-md-10" ng-controller="postCtrl">
-            <div ng-repeat="item in postlist.data">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" ng-controller="postCtrl">
               <div class="post-preview" >
-                  <a href="post.html">
+                  <a href="http://blog.hyunlee.co.kr/lhwda1388" target="_blank">
                       <h2 class="post-title">
-                          {{ item.title }}
+                          http://blog.hyunlee.co.kr/lhwda1388
                       </h2>
-                      <h3 class="post-subtitle">
-                          {{ item.content }}
-                      </h3>
                   </a>
-                  <p class="post-meta">Posted by <a href="#">{{ item.usr_email }}</a>{{ convertDate( item.reg_dt ) }}</p>
+                  <p class="post-meta">bloger: <a href="#">lhwda1388@gmail.com</a></p>
               </div>
               <hr>
-            </div>
-
             <!-- Pager -->
             <ul class="pager">
-                <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
             </ul>
         </div>
-        <% include layout/right.ejs %>
-
     </div>
 </div>
 
