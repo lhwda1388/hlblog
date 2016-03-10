@@ -35,7 +35,7 @@ var config = {
           total: totalPage,
           page: currentPage,
           maxVisible: blockSize,
-          leaps: false,
+          leaps: false, 
           wrapClass: 'pagination',
           activeClass: 'active',
           disabledClass: 'disabled',
