@@ -24,30 +24,23 @@ var config = {
 
       },
       getPager: function(pageNo, totRecord, $scope){
-
-        var blockSize = 1;
-        var currentPage = pageNo == undefined ? 1 : pageNo;
-        var recordSize = parseInt($scope.postInfo.listScale);
-        var totalPage = Math.ceil(totRecord/recordSize);
-
-        $('.pager').bootpag().off("page");
-        $('.pager').bootpag({
-          total: totalPage,
-          page: currentPage,
-          maxVisible: blockSize,
-          leaps: false, 
-          wrapClass: 'pagination',
-          activeClass: 'active',
-          disabledClass: 'disabled',
-          next: 'Older Posts &rarr;',
-          prev: '&larr;Newer Posts',
-          nextClass: 'next',
-          prevClass: 'previous',
-         }).on("page", function(event,  num){
-           $scope.postInfo.page_no = num;
-           $scope.BlogService.getList($scope);
-         });
-
+        var blockSize = 3;
+        var listscale = parseInt($scope.postInfo.listScale);
+        var totPage = Math.ceil(totRecord/listscale);
+        hlUtil.pager.settings = {
+          page_no : pageNo,
+          blockSize : blockSize,
+          listscale : listscale,
+          totCnt : totRecord,
+          totPage : totPage,
+          next : 'Newer',
+          prev : 'Older',
+          nextClass : 'next',
+          prevClass : 'previous',
+          rootId : 'paging',
+          numUse : false
+        };
+        hlUtil.pager.pageRender();
       }
 
     };
