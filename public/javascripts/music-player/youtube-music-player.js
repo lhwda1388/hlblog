@@ -96,7 +96,7 @@
 function onYouTubeIframeAPIReady() {
   document.body.innerHTML+='<div id="youtube-music-player-div" style="display:none"></div>';
   YMP.player = new YT.Player('youtube-music-player-div', {
-    videoId: 'M7lc1UVf-VE',
+    videoId: 'EpNp6gFzFZ0',
     events: {
       'onReady': function(){
         YMP.init();
@@ -108,6 +108,7 @@ function onYouTubeIframeAPIReady() {
       }
     }
   });
+
 }
 
 // controller
