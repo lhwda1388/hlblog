@@ -41,6 +41,11 @@ var config = {
           numUse : false
         };
         hlUtil.pager.pageRender();
+
+        $("#".concat(settings.rootId)).find("li").on("page",function(event,page){
+            alert(page)
+        });
+
       }
 
     };

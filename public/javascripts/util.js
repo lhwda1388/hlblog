@@ -14,10 +14,11 @@ var hlUtil = (function($){
                 prevClass : 'previous',
                 rootId : 'pager',
                 numUse : false
-              },
+    },
     pageRender : function(){
       var p = [];
       var settings = this.settings;
+      var $this = this;
       var pd = settings.page_no == 1 ? "disabled" : "";
       var nd = settings.page_no >= settings.totPage ? "disabled" : "";
       var pno = settings.page_no > 1 ? (settings.page_no - 1) : 1;
@@ -34,16 +35,20 @@ var hlUtil = (function($){
         }
       }
       if(settings.next){
-        p = p.concat(['<li data-pnum"', nno ,'" class="', settings.nextClass , ' ' , nd ,'"><a href="','javascript:void(0)','">', settings.next , '</a></li>' ]);
+        p = p.concat(['<li data-pnum="', nno ,'" class="', settings.nextClass , ' ' , nd ,'"><a href="','javascript:void(0)','">', settings.next , '</a></li>' ]);
       }
-      var rootDoc = document.getElementById(settings.rootId);
-      rootDoc.innerHTML = p.join('');
-      
+      var rootDoc = $("#".concat(settings.rootId));
+      rootDoc.html(p.join(''));
+
+      $("#".concat(settings.rootId)).find("li").click(function(){
+        var page = $(this).attr("data-pnum");
+        $(this).trigger("page",page);
+      });
+
 
     }
+
   }
-
-
   return method;
 
 })(jQuery);
