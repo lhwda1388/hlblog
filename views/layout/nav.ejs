@@ -10,10 +10,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><%=title%></a>
-            <a class="navbar-brand"><i id="ymp-play" class="fa fa-play fa-1x"></i></a>
+            <a class="navbar-brand" href="/<%=defaultPath%>"><%=title%></a>
+            <!--a class="navbar-brand"><i id="ymp-play" class="fa fa-play fa-1x"></i></a>
             <a class="navbar-brand"><i id="ymp-pause" class="fa fa-pause fa-1x"></i></a>
-            <a class="navbar-brand"><i id="ymp-change" class="fa fa-step-forward fa-1x"></i></a>
+            <a class="navbar-brand"><i id="ymp-change" class="fa fa-step-forward fa-1x"></i></a-->
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -24,20 +24,17 @@
                     <a href="/<%=defaultPath%>">Home</a>
                 </li>
                 <li>
-                    <a href="/<%=defaultPath%>/about">About</a>
+                    <a href="/<%=defaultPath%>/post/about">About</a>
                 </li>
                 <li>
-                    <a href="/<%=defaultPath%>/post">Sample Post</a>
+                    <a href="/<%=defaultPath%>/1234">Sample Post</a>
                 </li>
                 <li>
-                    <a href="/<%=defaultPath%>/contact">Contact</a>
-                </li>
-                <li>
-                  <% if(users){%>
+                  <% if(users){ %>
                     <a href="javascript:void(0)" onclick="location.href='/user/logout'">Logout</a>
                   <%}else{%>
                     <a href="javascript:void(0)" data-toggle="modal" data-target=".loginModal">Login</a>
-                  <%}%>
+                  <% } %>
                 </li>
             </ul>
             <% } %>

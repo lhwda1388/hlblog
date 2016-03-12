@@ -50,11 +50,11 @@ router.get('/:usr_path/:post_no', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../post.ejs' });
 });
 
-router.get('/:usr_path/contact', function(req, res, next) {
-  res.render(layout_path, { title : "hlblog" , body: '../contact.ejs' });
+router.get('/:usr_path/post/regist', function(req, res, next) {
+  res.render(layout_path, { title : "hlblog" , body: '../regist.ejs' });
 });
 
-router.get('/:usr_path/about', function(req, res, next) {
+router.get('/:usr_path/post/about', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../about.ejs' });
 });
 
