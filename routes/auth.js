@@ -44,3 +44,24 @@ module.exports.urlPath = function(req, res, next){
   }
   next();
 }
+module.exports.log = function(req, res, next){
+  var log    = global.mongoose.model('log');
+  var ip     = req.headers['x-forwarded-for'] ||
+               req.connection.remoteAddress ||
+               req.socket.remoteAddress ||
+               req.connection.socket.remoteAddress ||
+               req.clientIp;
+
+
+  var access_path = req.originalUrl;
+
+  var postRegist = new log({
+                      "access_path" : access_path,
+                      "ip"          : ip,
+                      "access_date" : Date.now()
+                  });
+  postRegist.save(function (err) {
+  });
+
+  next();
+}

@@ -23,7 +23,7 @@ router.post('/:usr_path/post/getPost', function(req, res, next){
   var post        = global.mongoose.model('post');
   var skipNo      = listScale * ( pageNo - 1 );
   var condition = {usr_path : usr_path};
-  console.log("category_no : " + category_no);
+
   if(category_no) {
       //searchText = new RegExp(searchText, "i");
       condition = { usr_path : usr_path, category_no : category_no};
@@ -86,7 +86,7 @@ router.post('/:usr_path/post/regist/set', auth.Auth, function(req, res, next) {
         if (err) {
 
         }else{
-        
+
         }
 
       });

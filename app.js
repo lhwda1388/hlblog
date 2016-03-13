@@ -14,6 +14,7 @@ var auth = require('./routes/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var flash = require('connect-flash');
+var requestIp = require('request-ip');
 
 var passportConf = require('./config/passport')(passport, mongoose.model('user'), LocalStrategy);
 
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
+app.use(requestIp.mw());
 app.use(require('express-session')({
     secret: 'mySecretKey',
     resave: false,
@@ -40,6 +42,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(auth.log);
 app.use('/user/', users);
 app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
   if(req.isAuthenticated() ) res.locals.users = req.user;
