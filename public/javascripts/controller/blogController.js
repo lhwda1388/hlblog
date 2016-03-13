@@ -4,7 +4,14 @@ var blogctrl = (function(){
   var app = angular.module('blogApp', ['textAngular']);
   var defaultPath = $(document.body).attr("data-defaultPath");
 
-  app.controller('postCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
+  app.controller('indexCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
+    $scope.blogUrlInfo = {};
+    $scope.blogUrllist = {};
+    $scope.blogUrllist.data  = {};
+    $scope.blogUrlInfo.getListPath =  "/etcs/getBlogUrlList";
+    blogService.getBlogUrlList($scope);
+
+  }]).controller('postCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
 
     $scope.postInfo = {};
     $scope.postInfo.page_no = 1;
@@ -17,7 +24,7 @@ var blogctrl = (function(){
     $scope.postInfo.getListPath = "/" + defaultPath + "/post/getPost";
     $scope.BlogService = blogService;
 
-    blogService.getList( $scope);
+    blogService.getList($scope);
 
     $scope.convertDate = function(dateStr){
       var fullDate = new Date(dateStr);

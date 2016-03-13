@@ -16,14 +16,14 @@
 <!-- Main Content -->
 <div class="container" >
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" ng-controller="postCtrl">
-              <div class="post-preview" >
-                  <a href="/lhwda1388" target="_self">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" ng-controller="indexCtrl">
+              <div class="post-preview" ng-repeat="item in blogUrllist.data">
+                  <a href="/{{ item.usr_path }}" target="_self">
                       <h2 class="post-title">
-                          blog.hyunlee.co.kr/lhwda1388
+                          blog.hyunlee.co.kr/{{ item.usr_path }}
                       </h2>
                   </a>
-                  <p class="post-meta">bloger: <a href="#">lhwda1388@gmail.com</a></p>
+                  <p class="post-meta">bloger: <a href="#">{{ item.usr_email }}</a></p>
               </div>
               <hr>
             <!-- Pager -->

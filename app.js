@@ -13,6 +13,7 @@ var model = require('./models/model')(mongoose);
 var auth = require('./routes/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var etcs = require('./routes/etcs')
 var flash = require('connect-flash');
 var requestIp = require('request-ip');
 
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 app.use(requestIp.mw());
+
 app.use(require('express-session')({
     secret: 'mySecretKey',
     resave: false,
@@ -44,6 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(auth.log);
 app.use('/user/', users);
+app.use('/etcs/', etcs);
 app.use("/:usr_path", auth.Category, auth.usrPathChk, function(req, res, next){
   if(req.isAuthenticated() ) res.locals.users = req.user;
   else res.locals.users = undefined;

@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   res.locals.defaultPath = "";
   res.render(layout_path, { title : "hlblog" , body: '../index.ejs' });
 });
+
 /* GET home page. */
 router.get('/:usr_path', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../main.ejs' });
@@ -98,6 +99,7 @@ router.post('/:usr_path/post/regist/set', auth.Auth, function(req, res, next) {
 router.get('/:usr_path/post/about', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../about.ejs' });
 });
+
 
 
 

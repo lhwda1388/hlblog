@@ -52,6 +52,14 @@ var config = {
        }catch(e){
 
        }
+     },
+     getBlogUrlList : function($scope){
+       $http.post($scope.blogUrlInfo.getListPath, {}).success(function(response){
+         var count = parseInt(response.count);
+         $scope.blogUrllist     = {};
+         $scope.blogUrllist.data  = response.urlList;
+       }).error(function(e){
+       });
      }
     };
   }]);
