@@ -52,8 +52,7 @@ var config = {
        }catch(e){
 
        }
-      }
-
+     }
     };
   }]);
 

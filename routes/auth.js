@@ -10,10 +10,12 @@ module.exports.Category = function(req, res, next){
 };
 
 module.exports.Auth = function(req, res, next){
-  var usr_path    = req.params.usr_path;
-  if(!req.isAuthenticated())
-
+  if(!req.isAuthenticated()){
+    var backURL = req.header('Referer') || '/' + req.params.usr_path;
+    res.redirect(backURL);
+  }
   next();
+
 };
 
 module.exports.usrPathChk = function(req, res, next){
