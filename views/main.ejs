@@ -21,11 +21,11 @@
             <div ng-repeat="item in postlist.data">
               <div class="post-preview" >
 
-                      <h2 class="post-title">
-                          {{ item.title }}
-                      </h2>
-                      <div class="post-subtitle" ng-bind-html="item.content | renderHtml">
-                      </div>
+                  <h2 class="post-title">
+                      {{ item.title }}
+                  </h2>
+                  <div class="post-subtitle" ng-bind-html="item.content | renderHtml">
+                  </div>
 
                   <p class="post-meta">Posted by <a href="#">{{ item.usr_email }}</a> on {{ convertDate( item.reg_dt ) }}</p>
 

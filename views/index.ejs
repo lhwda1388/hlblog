@@ -14,10 +14,11 @@
 </header>
 
 <!-- Main Content -->
-<div class="container" >
+<div class="container" ng-controller="indexCtrl">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" ng-controller="indexCtrl">
-              <div class="post-preview" ng-repeat="item in blogUrllist.data">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" >
+            <div ng-repeat="item in blogUrllist.data">
+              <div class="post-preview" >
                   <a href="/{{ item.usr_path }}" target="_self">
                       <h2 class="post-title">
                           blog.hyunlee.co.kr/{{ item.usr_path }}
@@ -26,6 +27,7 @@
                   <p class="post-meta">bloger: <a href="#">{{ item.usr_email }}</a></p>
               </div>
               <hr>
+            </div>
             <!-- Pager -->
             <ul class="pager">
             </ul>
