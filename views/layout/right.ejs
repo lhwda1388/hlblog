@@ -2,6 +2,7 @@
 <div class="col-lg-4 col-md-10" ng-controller="categoryCtrl">
 
     <% if(users){ %>
+      <% if(defaultPath == users.usr_path){ %>
     <!-- Post Regist Well -->
     <div class="well">
       <h4>Registration posts</h4>
@@ -9,6 +10,7 @@
         <a href="/<%=defaultPath%>/post/regist" type="button" target="_self" class="btn btn-block btn-default btn-sm deco-none">Registration</a>
       </p>
     </div>
+      <% } %>
     <% } %>
     <!-- Blog Search Well -->
     <div class="well">

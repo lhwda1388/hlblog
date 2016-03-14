@@ -27,15 +27,13 @@ var blogctrl = (function(){
     blogService.getList($scope);
 
     $scope.convertDate = function(dateStr){
-      var fullDate = new Date(dateStr);
-      var year = fullDate.getFullYear();
-      var month = fullDate.getMonth() + 1;
-      var date = fullDate.getDate();
-      if(month < 10) month = "0".concat(month);
-
-      return year + "." + month + "." + date;
+      return util.convertDate(dateStr);
     }
 
+  }]).controller('postDetailCtrl', ['$scope' , '$sce', function ($scope, $sce) {
+    $scope.convertDate = function(dateStr){
+      return util.convertDate(dateStr);
+    }
   }]).controller('RegistCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
     $scope.orightml = '';
     $scope.htmlcontent = $scope.orightml;

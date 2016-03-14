@@ -5,9 +5,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Clean Blog</h1>
+                    <h1>HlBlog</h1>
                     <hr class="small">
-                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    <span class="subheading">A HlBlog</span>
                 </div>
             </div>
         </div>
@@ -20,15 +20,17 @@
         <div class="col-lg-8 col-md-10" ng-controller="postCtrl">
             <div ng-repeat="item in postlist.data">
               <div class="post-preview" >
-                  <a href="post.html">
+
                       <h2 class="post-title">
                           {{ item.title }}
                       </h2>
                       <div class="post-subtitle" ng-bind-html="item.content | renderHtml">
                       </div>
-                  </a>
+
                   <p class="post-meta">Posted by <a href="#">{{ item.usr_email }}</a> on {{ convertDate( item.reg_dt ) }}</p>
+
               </div>
+              <a class="btn btn-primary" href="/<%=defaultPath%>/{{ item.post_no }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
               <hr>
             </div>
 

@@ -23,6 +23,16 @@ var util = (function(){
        }
       });
       return chk;
+    },
+    convertDate : function(dateStr){
+      var fullDate = new Date(dateStr);
+      var year = fullDate.getFullYear();
+      var month = fullDate.getMonth() + 1;
+      var date = fullDate.getDate();
+      if(month < 10) month = "0".concat(month);
+      if(date < 10) date = "0".concat(date);
+
+      return year + "." + month + "." + date;
     }
   }
 })();

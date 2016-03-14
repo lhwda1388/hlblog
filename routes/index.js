@@ -49,7 +49,25 @@ router.post('/:usr_path/post/getPost', function(req, res, next){
 });
 
 router.get('/:usr_path/:post_no', function(req, res, next) {
-  res.render(layout_path, { title : "hlblog" , body: '../post.ejs' });
+  var usr_path = req.params.usr_path;
+  var post_no  = req.params.post_no;
+  var post = global.mongoose.model('post');
+  var condition = {
+      usr_path : usr_path ,
+      post_no : post_no
+  };
+  var post_data = {};
+  post.findOne(condition)
+      .exec(function(err, data){
+        if(err || !data){
+          var backURL = req.header('Referer') || '/' + req.params.usr_path;
+          res.redirect(backURL);
+        }
+
+        res.render(layout_path, { title : "hlblog" , body: '../post.ejs' , post_data : data});
+
+      });
+
 });
 
 router.get('/:usr_path/post/regist', auth.Auth, function(req, res, next) {

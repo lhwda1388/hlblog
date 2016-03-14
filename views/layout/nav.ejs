@@ -26,16 +26,23 @@
                 <li>
                     <a href="/<%=defaultPath%>/post/about">About</a>
                 </li>
+            
+
+                <% if(users){ %>
                 <li>
-                    <a href="/<%=defaultPath%>/1234">Sample Post</a>
+                  <a href="javascript:void(0)" onclick="location.href='/user/logout'">Logout</a>
                 </li>
-                <li>
-                  <% if(users){ %>
-                    <a href="javascript:void(0)" onclick="location.href='/user/logout'">Logout</a>
-                  <%}else{%>
-                    <a href="javascript:void(0)" data-toggle="modal" data-target=".loginModal">Login</a>
+                  <% if(users.auth == 'A'){ %>
+                  <li>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target=".addUserModal">Add User</a>
+                  </li>
                   <% } %>
+                <% }else{ %>
+                <li>
+                  <a href="javascript:void(0)" data-toggle="modal" data-target=".loginModal">Login</a>
                 </li>
+                <% } %>
+
             </ul>
             <% } %>
         </div>

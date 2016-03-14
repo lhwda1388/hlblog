@@ -28,5 +28,8 @@ router.get('/logout' , function(req, res, next){
   req.logout()
   res.redirect(backURL);
 });
+router.post('/addUser', function(req, res, next){
+  
+});
 
 module.exports = router;
