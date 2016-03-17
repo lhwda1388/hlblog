@@ -48,7 +48,13 @@
                 <div class="row control-group" >
                     <div class="form-group col-xs-12">
                         <label>Contnet</label>
-                        <div text-angular="text-angular" name="content" ng-model="content" ta-disabled='disabled'></div>
+                        <summernote on-init="init()" on-enter="enter()" on-focus="focus(evt)"
+                        on-blur="blur(evt)" on-paste="paste()" on-keyup="keyup(evt)" on-keydown="keydown(evt)"
+                        on-change="change(contents)"
+                        on-image-upload="imageUpload(files, editor)"
+                        editable="editable"></summernote>
+                        <textarea ng-model="content" name="content" ng-hide="true"></textarea>
+
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>

@@ -79,6 +79,7 @@ router.post('/:usr_path/post/regist/set', auth.Auth, function(req, res, next) {
   if(req.user){
     var session= req.user;
     var field = req.body;
+    console.log(field);
     var title = field.title;
     var content = field.content;
     var usr_email = session.usr_email;

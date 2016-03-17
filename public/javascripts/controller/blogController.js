@@ -1,7 +1,7 @@
 
 var blogctrl = (function(){
   'use strict';
-  var app = angular.module('blogApp', ['textAngular']);
+  var app = angular.module('blogApp', ['summernote']);
   var defaultPath = $(document.body).attr("data-defaultPath");
 
   app.controller('indexCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
@@ -30,16 +30,40 @@ var blogctrl = (function(){
       return util.convertDate(dateStr);
     }
 
-  }]).controller('postDetailCtrl', ['$scope' , '$sce', function ($scope, $sce) {
+  }]).controller('postDetailCtrl', ['$scope', function ($scope) {
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
     }
   }]).controller('RegistCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-    $scope.orightml = '';
-    $scope.htmlcontent = $scope.orightml;
-    $scope.disabled = false;
-    $scope.BlogService = blogService;
+     $scope.init = function() {
 
+     };
+     $scope.enter = function() {
+
+     };
+     $scope.focus = function(e) {
+
+     };
+     $scope.blur = function(e) {
+
+     };
+     $scope.paste = function() {
+
+     };
+     $scope.change = function(contents) {
+       $scope.content = contents;
+       //console.log('contents are changed:', contents, $scope.editable);
+     };
+     $scope.keyup = function(e) {
+       //console.log('Key is released:', e.keyCode);
+     };
+     $scope.keydown = function(e) {
+       //console.log('Key is pressed:', e.keyCode);
+     };
+     $scope.imageUpload = function(files, editor) {
+       //console.log('image upload:', files, editor);
+       //console.log('image upload\'s editable:', $scope.editable);
+     };
   }]).controller('naviCtrl', ['$scope' ,  function ($scope) {
 
 
