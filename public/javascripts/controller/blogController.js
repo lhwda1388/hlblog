@@ -79,7 +79,12 @@ var blogctrl = (function(){
   }]).controller('footerCtrl', ['$scope' , function ($scope) {
 
 
+  }]).controller('modalCtrl', ['$scope' , function ($scope) {
+    
+
   }]);
+
+
 
   app.filter('renderHtml', ['$sce', function($sce){
     return function(val) {

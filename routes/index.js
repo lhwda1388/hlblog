@@ -115,6 +115,40 @@ router.post('/:usr_path/post/regist/set', auth.Auth, function(req, res, next) {
   res.redirect("/".concat(usr_path));
 });
 
+router.post('/:usr_path/addCat/set', auth.Auth, function(req, res, next) {
+  var usr_path    = req.params.usr_path;
+  if(req.user && req.user.auth == "A"){
+    var session= req.user;
+    var field = req.body;
+    var usr_path = session.usr_path;
+    var category_ne = field.category_ne;
+    var category = global.mongoose.model('category');
+    var cnt = 0;
+    category.count({}, function(err, count){
+        cnt = count;
+    });
+    category.findOne().sort({category_no : -1}).exec(function(err, doc){
+      var max = cnt == 0 ? 1 : parseInt(doc.category_no) + 1;
+      var catRegist = new category({
+                          "category_no" : max,
+                          "category_ne" : category_ne,
+                          "auth" : "",
+                          "usr_path" : usr_path,
+                          "reg_dt" : Date.now()
+                      });
+      catRegist.save(function (err) {
+        if (err) {
+
+        }else{
+
+        }
+
+      });
+    });
+  }
+  res.redirect("/".concat(usr_path));
+});
+
 router.get('/:usr_path/post/about', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../about.ejs' });
 });
