@@ -30,7 +30,7 @@
     <div class="well">
         <h4>Blog Categories</h4>
         <% if(users){ %>
-          <% if(users.auth == 'A'){ %>
+            <% if(defaultPath == users.usr_path){ %>
             <div class="col-lg-12">
               <div class="row">
                 <ul class="list-unstyled">
@@ -39,7 +39,7 @@
 
               </div>
             </div>
-          <% } %>
+            <% } %>
         <% } %>
 
         <div class="row">

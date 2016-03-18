@@ -30,6 +30,12 @@
 
               </div>
               <a class="btn btn-primary" href="/<%=defaultPath%>/{{ item.post_no }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+              <% if(users){ %>
+                <% if(defaultPath == users.usr_path || users.auth == 'A'){ %>
+                <a class="btn btn-success" href="/<%=defaultPath%>/{{ item.post_no }}/modify">Modify<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-danger" href="javascript:void(0)" ng-click="postDelete(item.post_no)">Delete<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <% } %>
+              <% } %>
               <hr>
             </div>
 

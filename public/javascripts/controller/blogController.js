@@ -16,7 +16,7 @@ var blogctrl = (function(){
     $scope.postInfo = {};
     $scope.postInfo.page_no = 1;
     $scope.postInfo.listScale = 3;
-    $scope.postInfo.board_no = 1;
+    $scope.postInfo.post_no = 1;
     $scope.postInfo.category_no = util.getKeyVal("category_no");
     $scope.postlist = {};
     $scope.postlist.data  = {};
@@ -28,6 +28,12 @@ var blogctrl = (function(){
 
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
+    }
+
+    $scope.postDelete = function(post_no){
+      $scope.postInfo.deletePath = "/" + defaultPath + "/post/deletePost";
+      $scope.postInfo.post_no = post_no;
+      blogService.postDelete($scope, post_no);
     }
 
   }]).controller('postDetailCtrl', ['$scope', function ($scope) {
@@ -80,7 +86,7 @@ var blogctrl = (function(){
 
 
   }]).controller('modalCtrl', ['$scope' , function ($scope) {
-    
+
 
   }]);
 

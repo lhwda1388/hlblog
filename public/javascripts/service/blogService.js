@@ -60,6 +60,15 @@ var config = {
          $scope.blogUrllist.data  = response.urlList;
        }).error(function(e){
        });
+     },
+     postDelete : function($scope, post_no){
+      var convtParam = JSON.stringify($scope.postInfo);
+       $http.post($scope.postInfo.deletePath, convtParam).success(function(response){
+         alert("test");
+         $scope.postInfo.page_no = 1;
+         $scope.BlogService.getList($scope);
+       }).error(function(e){alert("error");
+       });
      }
     };
   }]);
