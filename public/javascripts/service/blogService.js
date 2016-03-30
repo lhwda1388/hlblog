@@ -61,13 +61,14 @@ var config = {
        }).error(function(e){
        });
      },
-     postDelete : function($scope, post_no){
+     postDelete : function($scope){
       var convtParam = JSON.stringify($scope.postInfo);
        $http.post($scope.postInfo.deletePath, convtParam).success(function(response){
-         alert("test");
-         $scope.postInfo.page_no = 1;
-         $scope.BlogService.getList($scope);
-       }).error(function(e){alert("error");
+         if(response.resCode == "0000"){
+           $scope.postInfo.page_no = 1;
+           $scope.BlogService.getList($scope);
+         }
+       }).error(function(e){
        });
      }
     };

@@ -33,7 +33,7 @@ var blogctrl = (function(){
     $scope.postDelete = function(post_no){
       $scope.postInfo.deletePath = "/" + defaultPath + "/post/deletePost";
       $scope.postInfo.post_no = post_no;
-      blogService.postDelete($scope, post_no);
+      blogService.postDelete($scope);
     }
 
   }]).controller('postDetailCtrl', ['$scope', function ($scope) {

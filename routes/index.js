@@ -113,25 +113,21 @@ router.post('/:usr_path/post/regist/set', auth.Auth, function(req, res, next) {
   }
   res.redirect("/".concat(usr_path));
 });
-router.post('/:usr_path/post/deletePost', auth.Auth, function(res, req, next) {
-  var usr_path = req.params.usr_path;
-  console.log(req.body);
-  if(req.user){
-    var session = req.user;
-    var field = req.body;
-    var usr_path = session.usr_path;
-    var post_no = field.post_no;
-    var post = global.mongoose.model('post');
-    post.remove({ post_no: post_no }).exec(function(err) {
-      console.log('dfdfdfsfff');
-      if (err) {
+router.post('/:usr_path/post/deletePost',  function(req, res, next) {
 
-      }else {
-
-      }
-    });
-  }
-  res.redirect("/".concat(usr_path));
+  var field = req.body;
+  var post = global.mongoose.model('post');
+  post.remove({ post_no: field.post_no }).exec(function(err) {
+    if (err) {
+      res.send({
+          resCode         : "9999"
+      });
+    }else {
+      res.send({
+          resCode         : "0000"
+      });
+    }
+  });
 
 });
 
