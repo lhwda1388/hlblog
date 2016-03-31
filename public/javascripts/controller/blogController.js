@@ -70,6 +70,35 @@ var blogctrl = (function(){
        //console.log('image upload:', files, editor);
        //console.log('image upload\'s editable:', $scope.editable);
      };
+  }]).controller('ModifyCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
+     $scope.init = function() {
+     };
+     $scope.enter = function() {
+
+     };
+     $scope.focus = function(e) {
+
+     };
+     $scope.blur = function(e) {
+
+     };
+     $scope.paste = function() {
+
+     };
+     $scope.change = function(contents) {
+       $scope.content = contents;
+       //console.log('contents are changed:', contents, $scope.editable);
+     };
+     $scope.keyup = function(e) {
+       //console.log('Key is released:', e.keyCode);
+     };
+     $scope.keydown = function(e) {
+       //console.log('Key is pressed:', e.keyCode);
+     };
+     $scope.imageUpload = function(files, editor) {
+       //console.log('image upload:', files, editor);
+       //console.log('image upload\'s editable:', $scope.editable);
+     };
   }]).controller('naviCtrl', ['$scope' ,  function ($scope) {
 
 

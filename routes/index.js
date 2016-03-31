@@ -69,6 +69,64 @@ router.get('/:usr_path/:post_no', function(req, res, next) {
       });
 
 });
+router.get('/:usr_path/:post_no/modify', function(req, res, next) {
+  var usr_path = req.params.usr_path;
+  var backURL = req.header('Referer') || '/' + req.params.usr_path;
+  if(req.user && (req.user.usr_path == usr_path)){
+
+    var post_no  = req.params.post_no;
+    var post = global.mongoose.model('post');
+    var condition = {
+        usr_path : req.user.usr_path ,
+        post_no : post_no
+    };
+    var post_data = {};
+    post.findOne(condition)
+        .exec(function(err, data){
+          if(err || !data){
+            res.redirect(backURL);
+          }
+
+          res.render(layout_path, { title : "hlblog" , body: '../modify.ejs' , post_data : data});
+
+        });
+  }else{
+      res.redirect(backURL);
+  }
+});
+
+router.post('/:usr_path/:post_no/modify/set', auth.Auth, function(req, res, next) {
+  var usr_path    = req.params.usr_path;
+  var post_no  = req.params.post_no;
+  if(req.user && (req.user.usr_path == usr_path)){
+    var session= req.user;
+    var field = req.body;
+    var title = field.title;
+    var content = field.content;
+    var category_no = field.category_no;
+    var post = global.mongoose.model('post');
+    var cnt = 0;
+
+    post.update({post_no: post_no, usr_path: req.user.usr_path},
+                  {
+                    $set: {
+                          "category_no" : category_no,
+                          "title" : title,
+                          "content" : content,
+                          "reg_dt" : Date.now()
+                        }
+                  },
+                  function(err, result){
+                    if (err) {
+
+                    }else {
+
+                    }
+                  }
+               );
+  }
+  res.redirect("/".concat(usr_path));
+});
 
 router.get('/:usr_path/post/regist', auth.Auth, function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../regist.ejs' });
