@@ -24,8 +24,10 @@
                   <h2 class="col-lg-8 col-md-10" class="post-title">
                       {{ item.title }}
                   </h2>
+				  <br />
                   <div class="post-subtitle" ng-bind-html="item.content | renderHtml">
                   </div>
+				  <br />
                   <p class="post-meta">Posted by <a href="#">{{ item.usr_email }}</a> on {{ convertDate( item.reg_dt ) }}</p>
 
               </div>
