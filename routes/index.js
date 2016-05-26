@@ -70,6 +70,75 @@ router.get('/:usr_path/:post_no', function(req, res, next) {
 
 });
 
+router.post('/:usr_path/:post_no/getReplyList', function(req, res, next) {
+  var usr_path = req.params.usr_path;
+  var post_no  = req.params.post_no;
+  var reply = global.mongoose.model('reply');
+  var condition = {
+      post_no : post_no
+  };
+  var post_data = {};
+  reply.find(condition)        
+        .sort({reply_no : -1})
+        .exec(function (err, rpl) {
+            if (err) {
+                error.SERVER_ERROR(res, err);
+                return;
+            }
+			
+            reply.count(condition, function(err, count){
+                res.send({
+                    count       : count,
+                    reply       : rpl
+                });
+            });
+        });
+
+});
+
+router.post('/:usr_path/:post_no/setReply', function(req, res, next) {
+	var usr_path    = req.params.usr_path;
+	var post_no  	= req.params.post_no;
+	var usr_email   = "";
+	var resCode		= "0000";
+	if(req.user){
+		var session	= req.user;
+		usr_email 	= session.usr_email;
+    }else{
+		usr_email 	= "GUEST";
+	}	
+    var field 	= req.body;
+    var content = field.replyContent;
+    var reply 	= global.mongoose.model('reply');
+    var cnt 	= 0;
+    reply.count({}, function(err, count){
+        cnt = count;
+    });
+	
+    reply.findOne().sort({reply_no : -1}).exec(function(err, doc){
+      var max = cnt == 0 ? 1 : parseInt(doc.reply_no) + 1;
+      var replyRegist = new reply({
+									reply_no  : max,
+									post_no   : post_no ,
+									content   : content ,
+									usr_email : usr_email,
+									reg_dt 	  : Date.now()
+								});
+      replyRegist.save(function (err) {
+        if (err) {
+			resCode = "9999";
+        }else{
+			resCode = "0000";
+        }
+
+      });
+	  
+    });
+	res.send({ resCode : resCode });
+
+});
+
+
 
 router.post('/:usr_path/:post_no/getData', function(req, res, next) {
   var usr_path = req.params.usr_path;
@@ -79,7 +148,6 @@ router.post('/:usr_path/:post_no/getData', function(req, res, next) {
       usr_path : usr_path ,
       post_no : post_no
   };
-  console.log('test');
   var post_data = {};
   post.findOne(condition)
       .exec(function(err, data){

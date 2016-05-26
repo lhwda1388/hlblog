@@ -67,14 +67,14 @@ module.exports = function(mongoose){
   });
   mongoose.model('file', postSchema);
 
-  var reviewSchema = new Schema({
-    review_no : { type : Number , required : true , unique : true },
+  var replySchema = new Schema({
+    reply_no  : { type : Number , required : true , unique : true },
     post_no   : { type : Number , required : true },
     content   : { type : String },
-    usr_email  : { type : String },
+    usr_email : { type : String },
     reg_dt    : { type : Date , default : Date.now() }
   });
-  mongoose.model('review', reviewSchema);
+  mongoose.model('reply', replySchema);
 
   var logSchema = new Schema({
     access_path : { type : String },

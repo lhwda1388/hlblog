@@ -43,9 +43,21 @@ var blogctrl = (function(){
 	$scope.BlogService = blogService;
 	blogService.getPostDetail($scope);
 	  
+	$scope.replyList = {};
+    $scope.replyList.data  = {};
+	$scope.postInfo.getReplyListPath = window.location.pathname + "/getReplyList";
+	blogService.getReplyList($scope);
+	
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
     }
+	$scope.goReply = function(){	
+		var replyContent = document.reply_form.reply_content.value;
+		$scope.postInfo.replyContent = replyContent;
+		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply"; 
+		blogService.setReply($scope);
+	}
+	
   }]).controller('RegistCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
      $scope.init = function() {
 

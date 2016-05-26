@@ -77,6 +77,18 @@ var config = {
         });
 
 	 },
+	 getReplyList : function($scope) {
+
+        var convtParam = JSON.stringify($scope.postInfo);
+        $http.post($scope.postInfo.getReplyListPath, convtParam).success(function(response){
+          $scope.replyList     = {};
+          $scope.replyList.data  = response.reply;
+          
+        })
+        .error(function(e){
+        });
+
+      },
 	 getModData : function($scope){
 		var convtParam = JSON.stringify($scope.postInfo);
         $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
@@ -88,7 +100,7 @@ var config = {
         });
 	 },
      postDelete : function($scope){
-      var convtParam = JSON.stringify($scope.postInfo);
+       var convtParam = JSON.stringify($scope.postInfo);
        $http.post($scope.postInfo.deletePath, convtParam).success(function(response){
          if(response.resCode == "0000"){
            $scope.postInfo.page_no = 1;
@@ -96,7 +108,16 @@ var config = {
          }
        }).error(function(e){
        });
-     }
+     },
+	 setReply : function ($scope){
+	   var convtParam = JSON.stringify($scope.postInfo);
+       $http.post($scope.postInfo.setReplyPath, convtParam).success(function(response){
+         if(response.resCode == "0000"){
+           $scope.BlogService.getReplyList($scope);
+         }
+       }).error(function(e){
+       });
+	 }
     };
   }]);
 
