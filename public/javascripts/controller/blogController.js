@@ -12,7 +12,7 @@ var blogctrl = (function(){
     blogService.getBlogUrlList($scope);
 
   }]).controller('postCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-
+	
     $scope.postInfo = {};
     $scope.postInfo.page_no = 1;
     $scope.postInfo.listScale = 3;
@@ -36,7 +36,13 @@ var blogctrl = (function(){
       blogService.postDelete($scope);
     }
 
-  }]).controller('postDetailCtrl', ['$scope', function ($scope) {
+  }]).controller('postDetailCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
+	 
+	$scope.postInfo = {};
+	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
+	$scope.BlogService = blogService;
+	blogService.getPostDetail($scope);
+	  
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
     }
@@ -71,7 +77,13 @@ var blogctrl = (function(){
        //console.log('image upload\'s editable:', $scope.editable);
      };
   }]).controller('ModifyCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-     $scope.init = function() {
+	$scope.postInfo = {};
+	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
+	$scope.BlogService = blogService;
+	blogService.getModData($scope); 
+	  
+     $scope.init = function(obj) {
+		
      };
      $scope.enter = function() {
 

@@ -7,9 +7,9 @@
           <div class="row">
               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                   <div class="post-heading">
-                      <h1><%=post_data.title%></h1>
-                      <h2 class="subheading"><%=post_data.usr_path%></h2>
-                      <span class="meta">Posted by <a href="#"><%=post_data.usr_email%></a> on {{ convertDate('<%=post_data.reg_dt%>') }}</span>
+                      <h1 ng-bind="post_title"></h1>
+                      <h2 class="subheading" ng-bind="usr_path"></h2>
+                      <span class="meta">Posted by <a href="#" ng-bind="usr_email"></a> on {{ convertDate(reg_dt)}} </span>
                   </div>
               </div>
           </div>
@@ -20,8 +20,8 @@
   <article>
       <div class="container">
           <div class="row">
-              <div class="col-lg-8 col-md-10" >
-				 <div ng-bind-html="'<%=post_data.content%>' | renderHtml"></div>
+              <div class="col-lg-8 col-md-10 body_scroll" >
+				 <div ng-bind-html="content | renderHtml"></div>
                   <!-- Blog Comments -->
 
                   <!-- Comments Form -->

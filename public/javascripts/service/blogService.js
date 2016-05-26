@@ -61,6 +61,32 @@ var config = {
        }).error(function(e){
        });
      },
+	 getPostDetail : function($scope){
+		var convtParam = JSON.stringify($scope.postInfo);
+		
+        $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
+			var data = response.data;
+			
+			$scope.post_title   = data.title;
+			$scope.usr_path 	= data.usr_path;
+			$scope.usr_email 	= data.usr_email;
+			$scope.reg_dt 		= data.reg_dt;
+			$scope.content 		= data.content;
+        })
+        .error(function(e){
+        });
+
+	 },
+	 getModData : function($scope){
+		var convtParam = JSON.stringify($scope.postInfo);
+        $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
+			var data = response.data;
+			$scope.post_title   = data.title;
+			$scope.init_content 		= data.content;
+        })
+        .error(function(e){
+        });
+	 },
      postDelete : function($scope){
       var convtParam = JSON.stringify($scope.postInfo);
        $http.post($scope.postInfo.deletePath, convtParam).success(function(response){

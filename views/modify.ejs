@@ -19,7 +19,7 @@
 <!-- Main Content -->
 <div class="container" ng-controller="ModifyCtrl">
     <div class="row">
-        <div class="col-lg-8 col-md-10">
+        <div class="col-lg-8 col-md-10 body_scroll">
             <p>Write your think!</p>
             <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
             <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
@@ -44,21 +44,22 @@
                 <div class="row control-group">
                     <div class="form-group col-xs-12">
                         <label>Title</label>
-                        <input type="text" class="form-control" placeholder="Title" name="title" id="title" value="<%=post_data.title%>" required data-validation-required-message="Please enter Title.">
+                        <input type="text" class="form-control" placeholder="Title" name="title" id="title" ng-value="post_title" required data-validation-required-message="Please enter Title.">
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
-
+				
                 <div class="row control-group" >
                     <div class="form-group col-xs-12">
                         <label>Contnet</label>
-                        <summernote on-init="init()" on-enter="enter()" on-focus="focus(evt)"
+                        <summernote on-init="init(this)" on-enter="enter()" on-focus="focus(evt)"
                         on-blur="blur(evt)" on-paste="paste()" on-keyup="keyup(evt)" on-keydown="keydown(evt)"
                         on-change="change(contents)"
                         on-image-upload="imageUpload(files, editor)"
-                        editable="editable"><%=post_data.content%></summernote>
-                        <textarea ng-model="content" name="content" ng-hide="true"><%=post_data.content%></textarea>
-
+                        editable="editable" ng-model="init_content"></summernote>
+                        <textarea ng-model="content" name="content" ng-hide="false" ng-bind-html="init_content | renderHtml"></textarea>
+						
+						
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>

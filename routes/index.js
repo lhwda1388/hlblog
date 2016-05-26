@@ -64,11 +64,35 @@ router.get('/:usr_path/:post_no', function(req, res, next) {
           res.redirect(backURL);
         }
 
-        res.render(layout_path, { title : "hlblog" , body: '../post.ejs' , post_data : data});
+        res.render(layout_path, { title : "hlblog" , body: '../post.ejs' });
 
       });
 
 });
+
+
+router.post('/:usr_path/:post_no/getData', function(req, res, next) {
+  var usr_path = req.params.usr_path;
+  var post_no  = req.params.post_no;
+  var post = global.mongoose.model('post');
+  var condition = {
+      usr_path : usr_path ,
+      post_no : post_no
+  };
+  console.log('test');
+  var post_data = {};
+  post.findOne(condition)
+      .exec(function(err, data){
+        if(err || !data){
+          error.SERVER_ERROR(res, err);
+          return;
+        }
+		res.send({ data : data });
+
+      });
+
+});
+
 router.get('/:usr_path/:post_no/modify', function(req, res, next) {
   var usr_path = req.params.usr_path;
   var backURL = req.header('Referer') || '/' + req.params.usr_path;
@@ -93,6 +117,27 @@ router.get('/:usr_path/:post_no/modify', function(req, res, next) {
   }else{
       res.redirect(backURL);
   }
+});
+
+router.post('/:usr_path/:post_no/modify/getData', function(req, res, next) {
+	var usr_path = req.params.usr_path;
+    var post_no  = req.params.post_no;
+	console.log('1test');
+    var post = global.mongoose.model('post');
+    var condition = {
+        usr_path : req.user.usr_path ,
+        post_no : post_no
+    };
+    var post_data = {};
+    post.findOne(condition)
+        .exec(function(err, data){
+          if(err || !data){
+            error.SERVER_ERROR(res, err);
+			return;
+          }
+		  res.send({ data : data });
+        });
+  
 });
 
 router.post('/:usr_path/:post_no/modify/set', auth.Auth, function(req, res, next) {
