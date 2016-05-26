@@ -3,8 +3,33 @@ var error = require("../util/error");
 module.exports.Category = function(req, res, next){
   var Category    = global.mongoose.model('category');
   var usr_path    = req.params.usr_path;
+  var post        = global.mongoose.model('post');
   Category.find({usr_path : usr_path}, function(err, categories){
-    if(!err) req.categories = categories;
+    if(!err){
+      var condition = {usr_path : usr_path};
+      var cntList   = [];
+      var cntObj    = {};
+      post.count(condition, function(err, count){
+          categories.totalCnt = count;
+      });
+
+      for(var i=0; i < categories.length; i++){
+        var category_no = categories[i].category_no;
+        var cnt = 0;
+        if(category_no) {
+            condition = { usr_path : usr_path, category_no : category_no};
+        }
+        post.count(condition, function(err, count){
+          cntObj.count = count;
+          cntList.push(cntObj);
+          cntObj    = {};
+        });
+      }
+      categories.cntList = cntList;
+      req.categories = categories;
+    }
+
+
     next();
   });
 };

@@ -78,14 +78,14 @@ router.post('/:usr_path/:post_no/getReplyList', function(req, res, next) {
       post_no : post_no
   };
   var post_data = {};
-  reply.find(condition)        
+  reply.find(condition)
         .sort({reply_no : -1})
         .exec(function (err, rpl) {
             if (err) {
                 error.SERVER_ERROR(res, err);
                 return;
             }
-			
+
             reply.count(condition, function(err, count){
                 res.send({
                     count       : count,
@@ -106,7 +106,7 @@ router.post('/:usr_path/:post_no/setReply', function(req, res, next) {
 		usr_email 	= session.usr_email;
     }else{
 		usr_email 	= "GUEST";
-	}	
+	}
     var field 	= req.body;
     var content = field.replyContent;
     var reply 	= global.mongoose.model('reply');
@@ -114,7 +114,7 @@ router.post('/:usr_path/:post_no/setReply', function(req, res, next) {
     reply.count({}, function(err, count){
         cnt = count;
     });
-	
+
     reply.findOne().sort({reply_no : -1}).exec(function(err, doc){
       var max = cnt == 0 ? 1 : parseInt(doc.reply_no) + 1;
       var replyRegist = new reply({
@@ -132,7 +132,7 @@ router.post('/:usr_path/:post_no/setReply', function(req, res, next) {
         }
 
       });
-	  
+
     });
 	res.send({ resCode : resCode });
 
@@ -205,7 +205,7 @@ router.post('/:usr_path/:post_no/modify/getData', function(req, res, next) {
           }
 		  res.send({ data : data });
         });
-  
+
 });
 
 router.post('/:usr_path/:post_no/modify/set', auth.Auth, function(req, res, next) {
@@ -340,7 +340,6 @@ router.post('/:usr_path/addCat/set', auth.Auth, function(req, res, next) {
 router.get('/:usr_path/post/about', function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../about.ejs' });
 });
-
 
 
 
