@@ -57,7 +57,7 @@
                         on-change="change(contents)"
                         on-image-upload="imageUpload(files, editor)"
                         editable="editable" ng-model="init_content"></summernote>
-                        <textarea ng-model="content" name="content" ng-hide="false" ng-bind-html="init_content | renderHtml"></textarea>
+                        <textarea ng-model="content" name="content" ng-hide="true" ng-bind-html="init_content | renderHtml"></textarea>
 						
 						
                         <p class="help-block text-danger"></p>
