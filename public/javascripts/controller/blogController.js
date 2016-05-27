@@ -5,6 +5,7 @@ var blogctrl = (function(){
   var defaultPath = $(document.body).attr("data-defaultPath");
 
   app.controller('indexCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
+	  
     $scope.blogUrlInfo = {};
     $scope.blogUrllist = {};
     $scope.blogUrllist.data  = {};
@@ -18,9 +19,9 @@ var blogctrl = (function(){
     $scope.postInfo.listScale = 3;
     $scope.postInfo.post_no = 1;
     $scope.postInfo.category_no = util.getKeyVal("category_no");
+	$scope.postInfo.searchText  = util.getKeyVal("searchText");
     $scope.postlist = {};
     $scope.postlist.data  = {};
-    $scope.postInfo.search_text = "";
     $scope.postInfo.getListPath = "/" + defaultPath + "/post/getPost";
     $scope.BlogService = blogService;
 
@@ -127,14 +128,37 @@ var blogctrl = (function(){
 
 
   }]).controller('categoryCtrl',['$scope' , 'BlogService', function ($scope, blogService) {
-
+	var paramSText = util.getKeyVal("searchText");
+	if(paramSText){
+		paramSText = unescape(paramSText)
+		$scope.searchText = paramSText;
+	}
     $scope.goUrl = function(path, category_no){
-  if(category_no){
-        location.href = "/" + path + "?category_no=" + category_no;
-      }else{
-        location.href = "/" + path;
-      }
+		if(category_no){
+			location.href = "/" + path + "?category_no=" + category_no;
+		}else{
+			location.href = "/" + path;
+		}
     }
+	$scope.goSearch = function(){
+		
+		var searchText  = escape(document.getElementById("searchText").value);
+		var category_no = util.getKeyVal("category_no");
+		
+		var path = window.location.pathname;
+		if(category_no){
+			if(searchText){
+				path += "?category_no="+category_no + "&searchText=" + searchText;
+			}else{
+				path += "?category_no="+category_no;
+			}
+		}else{
+			if(searchText){
+				path += "?searchText=" + searchText;
+			}
+		}
+		location.href = path;
+	}
 
 
   }]).controller('footerCtrl', ['$scope' , function ($scope) {

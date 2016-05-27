@@ -15,37 +15,53 @@ router.get('/:usr_path', function(req, res, next) {
 });
 
 router.post('/:usr_path/post/getPost', function(req, res, next){
-  var field       = req.body;
-  var pageNo      = parseInt(field.page_no);
-  var listScale   = parseInt(field.listScale);
-  var usr_path    = req.params.usr_path;
-  var searchText  = field.search_text.trim();
-  var category_no = field.category_no;
-  var post        = global.mongoose.model('post');
-  var skipNo      = listScale * ( pageNo - 1 );
-  var condition = {usr_path : usr_path};
 
-  if(category_no) {
-      //searchText = new RegExp(searchText, "i");
-      condition = { usr_path : usr_path, category_no : category_no};
-  }
+	var field       = req.body;
+	var pageNo      = parseInt(field.page_no);
+	var listScale   = parseInt(field.listScale);
+	var usr_path    = req.params.usr_path;
+	var searchText  = field.searchText;
+	var category_no = field.category_no;
+	var post        = global.mongoose.model('post');
+	var skipNo      = listScale * ( pageNo - 1 );
+	var condition = {usr_path : usr_path};
+	
+	if(category_no) {
+		
+		if(searchText){
+			searchText = new RegExp(unescape(searchText).trim(), "i");
+			condition = { usr_path : usr_path, category_no : category_no , title : searchText};
+		}else{
+			condition = { usr_path : usr_path, category_no : category_no };
+		}
+		
+	}else{
+		
+		if(searchText){
+			searchText = new RegExp(unescape(searchText).trim(), "i");
+			condition = { usr_path : usr_path, title : searchText};
+		}else{
+			condition = { usr_path : usr_path};
+		}
+		
+	}
 
-  post.find(condition)
-        .skip(skipNo)
-        .limit(listScale)
-        .sort({post_no : -1})
-        .exec(function (err, pst) {
-            if (err) {
-                error.SERVER_ERROR(res, err);
-                return;
-            }
-            post.count(condition, function(err, count){
-                res.send({
-                    count       : count,
-                    post        : pst
-                });
-            });
-        });
+	post.find(condition)
+		.skip(skipNo)
+		.limit(listScale)
+		.sort({post_no : -1})
+		.exec(function (err, pst) {
+			if (err) {
+				error.SERVER_ERROR(res, err);
+				return;
+			}
+			post.count(condition, function(err, count){
+				res.send({
+					count       : count,
+					post        : pst
+				});
+			});
+		});
 });
 
 router.get('/:usr_path/:post_no', function(req, res, next) {
