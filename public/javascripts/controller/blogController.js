@@ -12,7 +12,7 @@ var blogctrl = (function(){
     blogService.getBlogUrlList($scope);
 
   }]).controller('postCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-	
+
     $scope.postInfo = {};
     $scope.postInfo.page_no = 1;
     $scope.postInfo.listScale = 3;
@@ -37,27 +37,27 @@ var blogctrl = (function(){
     }
 
   }]).controller('postDetailCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-	 
+
 	$scope.postInfo = {};
 	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
 	$scope.BlogService = blogService;
 	blogService.getPostDetail($scope);
-	  
+
 	$scope.replyList = {};
     $scope.replyList.data  = {};
 	$scope.postInfo.getReplyListPath = window.location.pathname + "/getReplyList";
 	blogService.getReplyList($scope);
-	
+
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
     }
-	$scope.goReply = function(){	
+	$scope.goReply = function(){
 		var replyContent = document.reply_form.reply_content.value;
 		$scope.postInfo.replyContent = replyContent;
-		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply"; 
+		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply";
 		blogService.setReply($scope);
 	}
-	
+
   }]).controller('RegistCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
      $scope.init = function() {
 
@@ -92,10 +92,10 @@ var blogctrl = (function(){
 	$scope.postInfo = {};
 	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
 	$scope.BlogService = blogService;
-	blogService.getModData($scope); 
-	  
+	blogService.getModData($scope);
+
      $scope.init = function(obj) {
-		
+
      };
      $scope.enter = function() {
 
@@ -126,14 +126,16 @@ var blogctrl = (function(){
   }]).controller('naviCtrl', ['$scope' ,  function ($scope) {
 
 
-  }]).controller('categoryCtrl', ['$scope' , function ($scope) {
+  }]).controller('categoryCtrl',['$scope' , 'BlogService', function ($scope, blogService) {
+
     $scope.goUrl = function(path, category_no){
-      if(category_no){
+  if(category_no){
         location.href = "/" + path + "?category_no=" + category_no;
       }else{
         location.href = "/" + path;
       }
     }
+
 
   }]).controller('footerCtrl', ['$scope' , function ($scope) {
 

@@ -61,44 +61,44 @@ var config = {
        }).error(function(e){
        });
      },
-	 getPostDetail : function($scope){
-		var convtParam = JSON.stringify($scope.postInfo);
-		
-        $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
-			var data = response.data;
-			
-			$scope.post_title   = data.title;
-			$scope.usr_path 	= data.usr_path;
-			$scope.usr_email 	= data.usr_email;
-			$scope.reg_dt 		= data.reg_dt;
-			$scope.content 		= data.content;
-        })
-        .error(function(e){
-        });
+  	 getPostDetail : function($scope){
+  		var convtParam = JSON.stringify($scope.postInfo);
 
-	 },
-	 getReplyList : function($scope) {
+          $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
+  			var data = response.data;
 
-        var convtParam = JSON.stringify($scope.postInfo);
-        $http.post($scope.postInfo.getReplyListPath, convtParam).success(function(response){
-          $scope.replyList     = {};
-          $scope.replyList.data  = response.reply;
-          
-        })
-        .error(function(e){
-        });
+  			$scope.post_title   = data.title;
+  			$scope.usr_path 	= data.usr_path;
+  			$scope.usr_email 	= data.usr_email;
+  			$scope.reg_dt 		= data.reg_dt;
+  			$scope.content 		= data.content;
+          })
+          .error(function(e){
+          });
 
-      },
-	 getModData : function($scope){
-		var convtParam = JSON.stringify($scope.postInfo);
-        $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
-			var data = response.data;
-			$scope.post_title   = data.title;
-			$scope.init_content 		= data.content;
-        })
-        .error(function(e){
-        });
-	 },
+  	 },
+  	 getReplyList : function($scope) {
+
+          var convtParam = JSON.stringify($scope.postInfo);
+          $http.post($scope.postInfo.getReplyListPath, convtParam).success(function(response){
+            $scope.replyList     = {};
+            $scope.replyList.data  = response.reply;
+
+          })
+          .error(function(e){
+          });
+
+        },
+  	 getModData : function($scope){
+  		var convtParam = JSON.stringify($scope.postInfo);
+          $http.post($scope.postInfo.getDataPath, convtParam).success(function(response){
+  			var data = response.data;
+  			$scope.post_title   = data.title;
+  			$scope.init_content 		= data.content;
+          })
+          .error(function(e){
+          });
+  	 },
      postDelete : function($scope){
        var convtParam = JSON.stringify($scope.postInfo);
        $http.post($scope.postInfo.deletePath, convtParam).success(function(response){
@@ -109,16 +109,25 @@ var config = {
        }).error(function(e){
        });
      },
-	 setReply : function ($scope){
-	   var convtParam = JSON.stringify($scope.postInfo);
-       $http.post($scope.postInfo.setReplyPath, convtParam).success(function(response){
-         if(response.resCode == "0000"){
-           $scope.BlogService.getReplyList($scope);
-         }
+  	 setReply : function ($scope){
+  	   var convtParam = JSON.stringify($scope.postInfo);
+         $http.post($scope.postInfo.setReplyPath, convtParam).success(function(response){
+           if(response.resCode == "0000"){
+             $scope.BlogService.getReplyList($scope);
+           }
+         }).error(function(e){
+         });
+  	 },
+     getCategoryCnt : function($scope){
+       var convtParam = JSON.stringify($scope.postInfo);
+       $http.post($scope.postInfo.categoryPath, convtParam).success(function(response){
+         $scope.cateCnt = response.count;
        }).error(function(e){
        });
-	 }
+     }
+
     };
+
   }]);
 
 })(config);

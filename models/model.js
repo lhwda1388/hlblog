@@ -37,8 +37,8 @@ module.exports = function(mongoose){
     title        :  { type : String , required : true},
     content      :  { type : String },
     read_cnt     :  { type : Number },
-    usr_email     :  { type : String , required : true },
-    usr_path  : { type : String },
+    usr_email    :  { type : String , required : true },
+    usr_path     :  { type : String },
     reg_dt       :  { type : Date , default : Date.now() }
   });
   mongoose.model('post', postSchema);
