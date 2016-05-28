@@ -33,6 +33,23 @@ var util = (function(){
       if(date < 10) date = "0".concat(date);
 
       return year + "." + month + "." + date;
+    },
+    imgUpload : function(file, editor, welEditable){
+      data = new FormData();
+      data.append("uploadFile", file);
+      $.ajax({
+          data : data,
+          type : "POST",
+          url : "/imageUpload",
+          cache : false,
+          contentType : false,
+          processData : false,
+          success : function(data) {
+              editor.insertImage(welEditable, data.url);
+          }
+      });
+
+
     }
   }
 })();

@@ -3,6 +3,7 @@ var router = express.Router();
 var layout_path = "layout/layout";
 var crypto = require('../util/crypto');
 var auth  = require("./auth");
+var fs = require('fs');
 
 router.get('/', function(req, res, next) {
   res.locals.defaultPath = "";
@@ -25,25 +26,25 @@ router.post('/:usr_path/post/getPost', function(req, res, next){
 	var post        = global.mongoose.model('post');
 	var skipNo      = listScale * ( pageNo - 1 );
 	var condition = {usr_path : usr_path};
-	
+
 	if(category_no) {
-		
+
 		if(searchText){
 			searchText = new RegExp(unescape(searchText).trim(), "i");
 			condition = { usr_path : usr_path, category_no : category_no , title : searchText};
 		}else{
 			condition = { usr_path : usr_path, category_no : category_no };
 		}
-		
+
 	}else{
-		
+
 		if(searchText){
 			searchText = new RegExp(unescape(searchText).trim(), "i");
 			condition = { usr_path : usr_path, title : searchText};
 		}else{
 			condition = { usr_path : usr_path};
 		}
-		
+
 	}
 
 	post.find(condition)

@@ -16,6 +16,7 @@ var users = require('./routes/users');
 var etcs = require('./routes/etcs')
 var flash = require('connect-flash');
 var requestIp = require('request-ip');
+var multer  = require('multer');
 
 var passportConf = require('./config/passport')(passport, mongoose.model('user'), LocalStrategy);
 
@@ -32,6 +33,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
