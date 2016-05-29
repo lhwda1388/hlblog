@@ -1,4 +1,3 @@
-
 var blogctrl = (function(){
   'use strict';
   var app = angular.module('blogApp', ['summernote']);
