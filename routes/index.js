@@ -258,7 +258,7 @@ router.post('/:usr_path/:post_no/modify/set', auth.Auth, function(req, res, next
   res.redirect("/".concat(usr_path));
 });
 
-router.get('/:usr_path/post/regist', auth.Auth, function(req, res, next) {
+router.get('/:usr_path/post/regist',function(req, res, next) {
   res.render(layout_path, { title : "hlblog" , body: '../regist.ejs' });
 });
 

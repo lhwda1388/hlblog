@@ -5,7 +5,7 @@ var blogctrl = (function(){
   var defaultPath = $(document.body).attr("data-defaultPath");
 
   app.controller('indexCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-	  
+
     $scope.blogUrlInfo = {};
     $scope.blogUrllist = {};
     $scope.blogUrllist.data  = {};
@@ -86,14 +86,17 @@ var blogctrl = (function(){
        //console.log('Key is pressed:', e.keyCode);
      };
      $scope.imageUpload = function(files, editor) {
-       //console.log('image upload:', files, editor);
-       //console.log('image upload\'s editable:', $scope.editable);
+       console.log('image upload:', files, editor);
+       console.log('image upload\'s editable:', $scope.editable);
+       $("#form1").attr("enctype","multipart/form-data");
+       util.imgUpload($("input[type=file]").eq(0), editor, $scope.editable);
+       $("#form1").removeAttr("enctype");
      };
   }]).controller('ModifyCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-	$scope.postInfo = {};
-	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
-	$scope.BlogService = blogService;
-	blogService.getModData($scope);
+  	$scope.postInfo = {};
+  	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
+  	$scope.BlogService = blogService;
+  	blogService.getModData($scope);
 
      $scope.init = function(obj) {
 
@@ -121,8 +124,11 @@ var blogctrl = (function(){
        //console.log('Key is pressed:', e.keyCode);
      };
      $scope.imageUpload = function(files, editor) {
-       //console.log('image upload:', files, editor);
-       //console.log('image upload\'s editable:', $scope.editable);
+       console.log('image upload:', files, editor);
+       console.log('image upload\'s editable:', $scope.editable);
+       $("#form1").attr("enctype","multipart/form-data");
+       util.imgUpload($("input[type=file]").eq(0), editor, $scope.editable);
+       $("#form1").removeAttr("enctype");
      };
   }]).controller('naviCtrl', ['$scope' ,  function ($scope) {
 
@@ -141,10 +147,10 @@ var blogctrl = (function(){
 		}
     }
 	$scope.goSearch = function(){
-		
+
 		var searchText  = escape(document.getElementById("searchText").value);
 		var category_no = util.getKeyVal("category_no");
-		
+
 		var path = window.location.pathname;
 		if(category_no){
 			if(searchText){

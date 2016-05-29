@@ -35,20 +35,32 @@ var util = (function(){
       return year + "." + month + "." + date;
     },
     imgUpload : function(file, editor, welEditable){
-      data = new FormData();
-      data.append("uploadFile", file);
-      $.ajax({
-          data : data,
+      var formData = new FormData();
+      formData.append("uploadFile", file);
+      $("#form1").ajaxSubmit({
+  			type : "post",
+  			url : "/etcs/imageUpload",
+  			data : {},
+  			success : function(data){
+          if(data.resCode == "0000"){
+                editor.insertImage(welEditable, data.url);
+          }
+  			}
+  		});
+     /* $.ajax({
+          data : formData,
           type : "POST",
           url : "/imageUpload",
           cache : false,
           contentType : false,
           processData : false,
           success : function(data) {
-              editor.insertImage(welEditable, data.url);
+              if(data.resCode == "0000"){
+                editor.insertImage(welEditable, data.url);
+              }
           }
       });
-
+      */
 
     }
   }
