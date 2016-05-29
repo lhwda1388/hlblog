@@ -89,6 +89,8 @@ var blogctrl = (function(){
        console.log('image upload:', files, editor);
        console.log('image upload\'s editable:', $scope.editable);
        $("#form1").attr("enctype","multipart/form-data");
+	   alert(files[0].value);
+	   alert($("input[type=file]").eq(0).val());
        util.imgUpload($("input[type=file]").eq(0), editor, $scope.editable);
        $("#form1").removeAttr("enctype");
      };
