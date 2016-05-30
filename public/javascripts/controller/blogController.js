@@ -18,13 +18,15 @@ var blogctrl = (function(){
     $scope.postInfo.listScale = 3;
     $scope.postInfo.post_no = 1;
     $scope.postInfo.category_no = util.getKeyVal("category_no");
-	$scope.postInfo.searchText  = util.getKeyVal("searchText");
+    $scope.postInfo.searchText  = util.getKeyVal("searchText");
     $scope.postlist = {};
     $scope.postlist.data  = {};
     $scope.postInfo.getListPath = "/" + defaultPath + "/post/getPost";
     $scope.BlogService = blogService;
 
     blogService.getList($scope);
+
+    util.setBodyScrollH(".category_a", ".body_scroll");
 
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
@@ -38,27 +40,32 @@ var blogctrl = (function(){
 
   }]).controller('postDetailCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
 
-	$scope.postInfo = {};
-	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
-	$scope.BlogService = blogService;
-	blogService.getPostDetail($scope);
+  	$scope.postInfo = {};
+  	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
+  	$scope.BlogService = blogService;
+  	blogService.getPostDetail($scope);
 
-	$scope.replyList = {};
+  	$scope.replyList = {};
     $scope.replyList.data  = {};
-	$scope.postInfo.getReplyListPath = window.location.pathname + "/getReplyList";
-	blogService.getReplyList($scope);
+  	$scope.postInfo.getReplyListPath = window.location.pathname + "/getReplyList";
+  	blogService.getReplyList($scope);
+
+    util.setBodyScrollH(".category_a", ".body_scroll");
 
     $scope.convertDate = function(dateStr){
       return util.convertDate(dateStr);
     }
-	$scope.goReply = function(){
-		var replyContent = document.reply_form.reply_content.value;
-		$scope.postInfo.replyContent = replyContent;
-		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply";
-		blogService.setReply($scope);
-	}
+  	$scope.goReply = function(){
+  		var replyContent = document.reply_form.reply_content.value;
+  		$scope.postInfo.replyContent = replyContent;
+  		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply";
+  		blogService.setReply($scope);
+  	}
 
   }]).controller('RegistCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
+
+     util.setBodyScrollH(".category_a", ".body_scroll");
+
      $scope.init = function() {
 
      };
@@ -88,16 +95,19 @@ var blogctrl = (function(){
        console.log('image upload:', files, editor);
        console.log('image upload\'s editable:', $scope.editable);
        $("#form1").attr("enctype","multipart/form-data");
-	   alert(files[0].value);
-	   alert($("input[type=file]").eq(0).val());
+  	   alert(files[0].value);
+  	   alert($("input[type=file]").eq(0).val());
        util.imgUpload($("input[type=file]").eq(0), editor, $scope.editable);
        $("#form1").removeAttr("enctype");
      };
   }]).controller('ModifyCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {
-  	$scope.postInfo = {};
-  	$scope.postInfo.getDataPath = window.location.pathname + "/getData";
-  	$scope.BlogService = blogService;
-  	blogService.getModData($scope);
+
+     $scope.postInfo = {};
+  	 $scope.postInfo.getDataPath = window.location.pathname + "/getData";
+  	 $scope.BlogService = blogService;
+  	 blogService.getModData($scope);
+
+     util.setBodyScrollH(".category_a", ".body_scroll");
 
      $scope.init = function(obj) {
 
@@ -135,17 +145,17 @@ var blogctrl = (function(){
 
 
   }]).controller('categoryCtrl',['$scope' , 'BlogService', function ($scope, blogService) {
-	var paramSText = util.getKeyVal("searchText");
-	if(paramSText){
-		paramSText = unescape(paramSText)
-		$scope.searchText = paramSText;
-	}
+  	var paramSText = util.getKeyVal("searchText");
+  	if(paramSText){
+  		paramSText = unescape(paramSText)
+  		$scope.searchText = paramSText;
+  	}
     $scope.goUrl = function(path, category_no){
-		if(category_no){
-			location.href = "/" + path + "?category_no=" + category_no;
-		}else{
-			location.href = "/" + path;
-		}
+  		if(category_no){
+  			location.href = "/" + path + "?category_no=" + category_no;
+  		}else{
+  			location.href = "/" + path;
+  		}
     }
 	$scope.goSearch = function(){
 

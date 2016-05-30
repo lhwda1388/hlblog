@@ -62,6 +62,11 @@ var util = (function(){
       });
       */
 
-    }
+    },
+    setBodyScrollH : function (standardCls, targetCls){
+  		var standard_h = $(standardCls).height();
+  		var target_h   = $(targetCls).height();
+  		if(target_h < standard_h) $(targetCls).height(standard_h);
+	 }
   }
 })();
