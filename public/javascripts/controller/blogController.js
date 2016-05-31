@@ -60,6 +60,7 @@ var blogctrl = (function(){
   		$scope.postInfo.replyContent = replyContent;
   		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply";
   		blogService.setReply($scope);
+      $scope.reply_content = "";
   	}
 
   }]).controller('RegistCtrl', ['$scope' ,'BlogService', function ($scope, blogService) {

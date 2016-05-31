@@ -311,9 +311,19 @@ router.post('/:usr_path/post/deletePost',  function(req, res, next) {
           resCode         : "9999"
       });
     }else {
-      res.send({
-          resCode         : "0000"
+      var reply = global.mongoose.model('reply');
+      reply.remove({ post_no: field.post_no }).exec(function(err){
+        if (err) {
+          res.send({
+              resCode         : "9999"
+          });
+        }else {
+          res.send({
+              resCode         : "0000"
+          });
+        }
       });
+
     }
   });
 
