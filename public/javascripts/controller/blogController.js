@@ -57,7 +57,8 @@ var blogctrl = (function(){
     }
   	$scope.goReply = function(){
   		var replyContent = document.reply_form.reply_content.value;
-  		$scope.postInfo.replyContent = replyContent;
+      if(replyContent == "" || replyContent.length <= 0) return;
+      $scope.postInfo.replyContent = replyContent;
   		$scope.postInfo.setReplyPath = window.location.pathname + "/setReply";
   		blogService.setReply($scope);
       $scope.reply_content = "";
