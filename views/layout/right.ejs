@@ -48,7 +48,7 @@
     				<p>
     					<a href="javascript:void(0)"  ng-click ="goUrl('<%=defaultPath%>')" class="btn btn-block btn-default btn-xs">전체[<%=categories.totalCnt%>]</a>
               <% for(var i=0; i < categories.length; i++){%>
-    						<a href="javascript:void(0)" ng-click ="goUrl('<%=defaultPath%>',<%=categories[i].category_no%>)" class="btn btn-block btn-primary btn-xs col-lg-6" style="margin-top:3px;">
+    						<a href="javascript:void(0)" ng-click ="goUrl('<%=defaultPath%>',<%=categories[i].category_no%>)" class="btn  btn-primary btn-xs col-lg-6"   style="font-size:10px;margin-top:3px;text-align:center;">
                   <%=categories[i].category_ne%>[<%=categories.cntList[i].count%>]
                 </a>
     					<%}%>
